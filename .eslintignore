@@ -1,0 +1,7 @@
+.eslintrc.cjs
+jest.config.js
+node_modules
+dist
+coverage
+*.d.ts
+tmp
