@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Résumé Generator</title>
+    <style>
+      <%- fonts.embed('icons.ttf') %>
+
+      h1:before {
+        font-family: "icons";
+        content: "\f1c1";
+        padding-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- content.render('readme') %>
+  </body>
+</html>

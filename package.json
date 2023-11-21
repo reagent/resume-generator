@@ -14,11 +14,15 @@
     "tabWidth": 2
   },
   "scripts": {
+    "cli": "ts-node src/cli.ts",
     "lint": "eslint . --ext .ts",
     "test": "jest",
     "test:coverage": "yarn test --coverage",
     "prebuild": "rimraf dist/",
     "build": "tsc --build tsconfig.build.json"
+  },
+  "bin": {
+    "resume": "./dist/cli.js"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",
@@ -36,8 +40,10 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "commander": "^11.1.0",
     "ejs": "^3.1.9",
     "marked": "^10.0.0",
+    "pdf-merger-js": "^4.3.0",
     "puppeteer": "^21.5.2"
   }
 }
