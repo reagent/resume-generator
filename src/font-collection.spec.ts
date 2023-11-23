@@ -23,7 +23,7 @@ describe(FontCollection.name, () => {
       expect(collection.embed('Cambria.ttf')).toEqual(`
       @font-face {
         font-family: "Cambria";
-        src: url(data:application/font-ttf;charset=utf-8;base64,Y29udGVudA==) format("truetype");
+        src: url("${dir}/Cambria.ttf") format("truetype");
       }`);
     });
 
