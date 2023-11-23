@@ -76,16 +76,6 @@ describe(Font.name, () => {
     });
   });
 
-  describe('content()', () => {
-    it('returns the content as a base64 encoded string', () => {
-      const src = join(dir, 'Cambria.ttf');
-      writeFileSync(src, 'content');
-
-      const font = new Font(src);
-      expect(font.content()).toEqual('Y29udGVudA==');
-    });
-  });
-
   describe('render', () => {
     it('renders', () => {
       const src = join(dir, 'Cambria.ttf');
@@ -95,7 +85,7 @@ describe(Font.name, () => {
       expect(font.render()).toEqual(`
       @font-face {
         font-family: "Cambria";
-        src: url(data:application/font-ttf;charset=utf-8;base64,Y29udGVudA==) format("truetype");
+        src: url("${dir}/Cambria.ttf") format("truetype");
       }`);
     });
   });

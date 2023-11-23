@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import { basename, extname } from 'path';
 
 type Format = 'truetype' | 'woff' | 'woff2';
@@ -51,16 +50,11 @@ export class Font {
     return this.mapping[this.extension].contentType;
   }
 
-  content(): string {
-    return readFileSync(this.path).toString('base64');
-  }
-
   render(): string {
-    // prettier-ignore
     return `
       @font-face {
         font-family: "${this.name}";
-        src: url(data:${this.contentType};charset=utf-8;base64,${this.content()}) format("${this.format}");
+        src: url("${this.path}") format("${this.format}");
       }`;
   }
 }
