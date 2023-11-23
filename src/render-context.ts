@@ -9,6 +9,12 @@ import puppeteer from 'puppeteer';
 import { ContentCollection } from './content-collection';
 import { FontCollection } from './font-collection';
 
+type RenderOptions = {
+  contentPath: string;
+  fontPath: string;
+  templatePath: string;
+};
+
 class Target {
   constructor(readonly content: string) {}
 
@@ -37,10 +43,12 @@ class Target {
 export class RenderContext {
   readonly contentPath: string;
   readonly fontPath: string;
+  readonly templatePath: string;
 
-  constructor(options: { contentPath: string; fontPath: string }) {
+  constructor(options: RenderOptions) {
     this.contentPath = options.contentPath;
     this.fontPath = options.fontPath;
+    this.templatePath = options.templatePath;
   }
 
   get fonts(): FontCollection {
@@ -54,10 +62,16 @@ export class RenderContext {
   render(templatePath: string): Target {
     const template = readFileSync(templatePath, { encoding: 'utf-8' });
 
-    const content = ejs.render(template, {
-      fonts: this.fonts,
-      content: this.content,
-    });
+    const content = ejs.render(
+      template,
+      {
+        fonts: this.fonts,
+        content: this.content,
+      },
+      {
+        views: [this.templatePath],
+      },
+    );
 
     return new Target(content);
   }
