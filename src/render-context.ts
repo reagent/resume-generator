@@ -8,6 +8,7 @@ import puppeteer from 'puppeteer';
 
 import { ContentCollection } from './content-collection';
 import { FontCollection } from './font-collection';
+import { PDFOutputOptions } from './types';
 
 type RenderOptions = {
   contentPath: string;
@@ -22,7 +23,7 @@ class Target {
     writeFileSync(path, this.content);
   }
 
-  async toPDF(path: string): Promise<void> {
+  async toPDF(path: string, options: PDFOutputOptions): Promise<void> {
     const htmlPath = join(tmpdir(), `${randomUUID()}.html`);
     this.toHTML(htmlPath);
 
@@ -31,7 +32,7 @@ class Target {
       const page = await browser.newPage();
 
       await page.goto(`file://${htmlPath}`);
-      await page.pdf({ path });
+      await page.pdf({ path, margin: options.margins });
 
       await browser.close();
     } finally {
