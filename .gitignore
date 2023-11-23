@@ -3,3 +3,4 @@ dist
 tmp
 coverage
 *.log
+*.tgz
