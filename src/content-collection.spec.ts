@@ -1,5 +1,5 @@
 import { tmpdir } from 'os';
-import { ContentCollection } from './content-collection';
+import { ContentCollection, ContentMissingError } from './content-collection';
 import { join } from 'path';
 import { randomUUID } from 'crypto';
 import { mkdirSync, rmSync, writeFileSync } from 'fs';
@@ -30,6 +30,12 @@ describe(ContentCollection.name, () => {
 
       const collection = new ContentCollection(dir);
       expect(collection.render('subdir/content')).toEqual('<h1>Content</h1>');
+    });
+
+    it('throws an exception when the content does not exist', () => {
+      const collection = new ContentCollection(dir);
+
+      expect(() => collection.render('missing')).toThrow(ContentMissingError);
     });
   });
 });
