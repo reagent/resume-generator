@@ -10,11 +10,11 @@ class FontMissingError extends Error {
 class FontCollection {
   constructor(readonly path: string) {}
 
-  embed(fontName: string): string {
-    const font = this.fonts().find((f) => f.name == fontName);
+  embed(filename: string): string {
+    const font = this.fonts().find((f) => f.filename == filename);
 
     if (!font) {
-      throw new FontMissingError(fontName);
+      throw new FontMissingError(filename);
     }
 
     return font.render();

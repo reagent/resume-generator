@@ -31,6 +31,14 @@ export class Font {
 
   constructor(readonly path: string) {}
 
+  get filename(): string {
+    return basename(this.path);
+  }
+
+  get extension(): string {
+    return extname(this.path);
+  }
+
   get name(): string {
     return this.filename.replace(this.extension, '');
   }
@@ -54,13 +62,5 @@ export class Font {
         font-family: "${this.name}";
         src: url(data:${this.contentType};charset=utf-8;base64,${this.content()}) format("${this.format}");
       }`;
-  }
-
-  private get filename(): string {
-    return basename(this.path);
-  }
-
-  private get extension(): string {
-    return extname(this.path);
   }
 }
