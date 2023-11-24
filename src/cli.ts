@@ -24,7 +24,6 @@ program
 
     const assetsPath = join(path, 'assets');
 
-    mkdirSync(join(assetsPath, 'images'), { recursive: true });
     mkdirSync(join(assetsPath, 'fonts'), { recursive: true });
 
     copyFileSync(
